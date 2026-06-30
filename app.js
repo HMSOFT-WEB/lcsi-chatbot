@@ -33,19 +33,31 @@ let currentSession = {
 let webllmEngine = null;
 const ON_DEVICE_MODEL = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC"; // Efficient ~350MB SLM for WebGPU
 
-// WebGPU Capability Diagnosis
-const hasWebGPU = !!navigator.gpu;
-if (!hasWebGPU) {
-  console.warn("WebGPU is not supported on this browser/device. Falling back to Gemini Cloud.");
-  // Change default option to Gemini
-  engineSelector.value = "gemini";
-  // Add a helper warning annotation inside the dropdown
-  const opt = engineSelector.querySelector('option[value="ondevice"]');
-  if (opt) {
-    opt.disabled = true;
-    opt.innerText = "💻 온디바이스 AI (WebGPU 지원 안 됨)";
+// WebGPU Capability Diagnosis (Asynchronous Deep Test)
+async function diagnoseWebGPUSupport() {
+  const hasGpuAPI = !!navigator.gpu;
+  let hasHardwareAdapter = false;
+  
+  if (hasGpuAPI) {
+    try {
+      const adapter = await navigator.gpu.requestAdapter();
+      hasHardwareAdapter = !!adapter;
+    } catch (e) {
+      hasHardwareAdapter = false;
+    }
+  }
+  
+  if (!hasGpuAPI || !hasHardwareAdapter) {
+    console.warn("WebGPU hardware acceleration is not supported or disabled on this device.");
+    engineSelector.value = "gemini";
+    const opt = engineSelector.querySelector('option[value="ondevice"]');
+    if (opt) {
+      opt.disabled = true;
+      opt.innerText = "💻 온디바이스 AI (기기 GPU 가속 미지원)";
+    }
   }
 }
+diagnoseWebGPUSupport();
 
 // Crisis Detection Patterns (CSO Guardrail)
 const CRISIS_PATTERNS = [
