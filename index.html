@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LCSI 심리검사 맞춤형 AI 공감 상담 챗봇 PoC</title>
-  <meta name="description" content="수검자의 LCSI 심리검사 결과 코드를 바탕으로 한 맞춤형 RAG AI 공감 상담사 파일럿(PoC) 웹 서비스입니다.">
+  <title>LCSI 심리검사 맞춤형 온디바이스 AI 공감 상담소</title>
+  <meta name="description" content="사용자의 기기에서 100% 실시간으로 직접 돌아가는 온디바이스 SLM RAG 기반 프리미엄 심리상담 챗봇 서비스입니다.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,11 +17,18 @@
         <div class="logo-area">
           <div class="logo-icon">L</div>
           <div>
-            <h1 class="app-title">LCSI AI Assistant</h1>
-            <p class="app-subtitle">심리상담 RAG 파일럿 시스템</p>
+            <h1 class="app-title">LCSI On-Device AI</h1>
+            <p class="app-subtitle">온디바이스 심리상담 RAG 시스템</p>
           </div>
         </div>
         <div class="header-actions">
+          <!-- Engine Selector Dropdown -->
+          <div class="engine-selector-container">
+            <select id="engineSelector" class="engine-select" aria-label="AI 엔진 선택">
+              <option value="ondevice" selected>💻 온디바이스 AI (무제한/오프라인)</option>
+              <option value="gemini">☁️ 구글 Gemini AI (API Key 필요)</option>
+            </select>
+          </div>
           <!-- Reset Session Button -->
           <button id="btnReset" class="btn-icon" title="세션 초기화" aria-label="세션 초기화">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -41,11 +48,29 @@
         </div>
       </header>
 
+      <!-- On-Device AI Downloading Dashboard overlay (Shows when model loading is active) -->
+      <div id="modelLoaderContainer" class="model-loader-container hidden">
+        <div class="loader-content">
+          <div class="loader-spinner-box">
+            <div class="spinner-neon"></div>
+            <div class="loader-logo">ON</div>
+          </div>
+          <h3>온디바이스 AI 엔진 초기화 중</h3>
+          <p id="modelLoadStatus">기기(WebGPU) 가속을 확인하고 로컬 인공지능 모델(Qwen2.5-0.5B 약 350MB)을 메모리에 상주시키는 중입니다. 최초 1회만 다운로드됩니다.</p>
+          <div class="progress-wrapper">
+            <div class="progress-bar-bg">
+              <div id="modelProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div id="modelProgressText" class="progress-percent">0%</div>
+          </div>
+        </div>
+      </div>
+
       <!-- 1. Welcome Screen (Entry) -->
       <section id="welcomeScreen" class="screen welcome-screen">
         <div class="welcome-hero">
-          <h2>맞춤형 AI 공감 상담소</h2>
-          <p>보유하신 LCSI 심리검사 결과 코드를 입력하시면, 외부 지식 노출을 차단한 채 오직 자체 검증된 해석 매뉴얼 데이터베이스(PoC 60종 구성)만을 RAG 검색하여 1:1 맞춤 안심 상담을 지원해 드립니다.</p>
+          <h2>온디바이스 AI 맞춤형 공감 상담소</h2>
+          <p>사용하시는 디바이스(PC/모바일) 내부의 GPU를 이용하여 <strong>완벽한 오프라인 환경</strong>에서 AI 연산을 직접 수행합니다. 외부 서버 전송이 일절 없는 100%의 개인정보 보호 및 실시간 RAG 성격 해석 가이드를 무상 경험해 보세요.</p>
         </div>
         
         <div class="input-box">
@@ -54,7 +79,7 @@
               <label for="lcsiCodeInput">LCSI 심리 코드 입력</label>
               <input type="text" id="lcsiCodeInput" class="text-input" placeholder="ESTJ" maxlength="8" required autocomplete="off" autofocus>
             </div>
-            <button type="submit" class="btn-submit">맞춤형 상담소 입장</button>
+            <button type="submit" class="btn-submit">온디바이스 상담방 입장</button>
           </form>
         </div>
       </section>
@@ -104,7 +129,7 @@
     <div class="emergency-card">
       <div class="danger-icon">!</div>
       <h3>심리적 안정을 위한 안내</h3>
-      <p>작성해주신 내용에서 심리적 위기 징후(자살/자해 위험 등)가 감지되어 AI 챗봇 상담을 일시 중단합니다. 당신은 소중한 사람입니다. 지금 당장 아래 상담 핫라인이나 전문 기관을 통해 전문적인 도움을 꼭 받으시길 바랍니다.</p>
+      <p>작성해주신 내용에서 심리적 위기 징후(자살/자해 위험 등)가 감지되어 AI 챗봇 상담을 즉시 중단합니다. 당신은 소중한 사람입니다. 지금 당장 아래 상담 핫라인이나 전문 기관을 통해 따뜻한 도움을 꼭 받으시길 바랍니다.</p>
       
       <div class="emergency-hotlines">
         <a href="tel:109" class="hotline-btn">
@@ -139,7 +164,7 @@
           <input type="password" id="apiKeyInput" class="text-input" placeholder="AI_Key_입력" required>
         </div>
         <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 20px; text-align: left; line-height: 1.4;">
-          * 이 챗봇은 서버를 거치지 않고 사용자 브라우저에서 직접 Google API를 호출하는 100% Client-Side 안전 구조를 채택하고 있습니다. 입력하신 API 키는 브라우저 내부 LocalStorage에만 암호화 저장되어 서버로 전송되지 않습니다.
+          * 이 챗봇은 '온디바이스 AI'를 기본 엔진으로 권장하지만, 구글 클라우드 AI 모드를 활성화하고자 할 경우에만 API 키 입력이 요구됩니다. 입력하신 키는 로컬 보안 저장소에만 암호화 저장됩니다.
         </p>
         <div class="settings-actions">
           <button type="button" id="btnCloseSettings" class="btn-secondary">닫기</button>
@@ -151,6 +176,7 @@
 
   <!-- Project Scripts -->
   <script src="lcsi_data.js"></script>
-  <script src="app.js"></script>
+  <!-- Main application loaded as a module for ESM importing of WebLLM -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>

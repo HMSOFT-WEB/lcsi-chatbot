@@ -672,3 +672,140 @@ body {
     display: none; /* Mobile sidebar toggles or hides secondary profiles */
   }
 }
+
+/* --- AI Engine Selector UI --- */
+.engine-selector-container {
+  margin-right: 8px;
+}
+
+.engine-select {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.engine-select:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #6366f1;
+}
+
+/* --- On-Device Model Loader Overlay --- */
+.model-loader-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(2, 6, 17, 0.9);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.loader-content {
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  padding: 30px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.loader-spinner-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-neon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top-color: #6366f1;
+  border-bottom-color: #10b981;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+.loader-logo {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #6366f1 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+.loader-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.loader-content p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* --- Progress Bar --- */
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #10b981);
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-percent {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
