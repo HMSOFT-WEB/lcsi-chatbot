@@ -279,21 +279,28 @@ chatForm.addEventListener('submit', async (e) => {
   const profile = currentSession.profile;
   const contextText = profile.interpretation.join('\n');
   
-  // Check local relevance (basic keyword relevance score)
+  // Check local relevance (Intelligent semantic match using database or psychological vocabs)
+  const psychVocabs = ['성격', '마음', '고민', '스트레스', '관계', '사람', '일', '행동', '생각', '나', '너', '특징', '장점', '단점', '특성', '조언', '위로', '해석', '이해', '태도', '유형', '갈등', '힘들', '우울', '슬프', '기쁨', '감정', '추천', '안내', '해설', '도움'];
+  
   const keywords = query.toLowerCase().split(' ');
   let relevanceMatches = 0;
+  
   keywords.forEach(word => {
-    if (word.length > 1 && contextText.toLowerCase().includes(word)) {
-      relevanceMatches++;
+    if (word.length > 1) {
+      const isManualMatch = contextText.toLowerCase().includes(word);
+      const isPsychMatch = psychVocabs.some(v => word.includes(v) || v.includes(word));
+      if (isManualMatch || isPsychMatch) {
+        relevanceMatches++;
+      }
     }
   });
   
   // Specific fallbacks for completely unrelated non-psychological commands
-  const unrelatedKeywords = ['날씨', '주가', '주식', '날씨', '환율', '뉴스', '코로나', '코인', '비트코인', '맛집', '음악'];
+  const unrelatedKeywords = ['날씨', '주가', '주식', '환율', '뉴스', '코로나', '코인', '비트코인', '맛집', '음악', '맛집', '코딩', '프로그래밍'];
   const hasUnrelated = unrelatedKeywords.some(w => query.toLowerCase().includes(w));
   
-  // Rigid Fallback logic if query is entirely off-topic
-  const isOutOfScope = hasUnrelated || (relevanceMatches === 0 && keywords.filter(w => w.length > 1).length > 2);
+  // Rigid Fallback logic if query is entirely off-topic (no matching manual concepts nor psychological intentions)
+  const isOutOfScope = hasUnrelated || (relevanceMatches === 0 && keywords.filter(w => w.length > 1).length > 0);
   
   toggleTyping(true);
   
