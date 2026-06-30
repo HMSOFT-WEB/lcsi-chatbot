@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCSI 심리검사 맞춤형 AI 공감 상담 챗봇 PoC</title>
+  <meta name="description" content="수검자의 LCSI 심리검사 결과 코드를 바탕으로 한 맞춤형 RAG AI 공감 상담사 파일럿(PoC) 웹 서비스입니다.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <div class="glass-panel">
+      
+      <!-- App Header -->
+      <header class="app-header">
+        <div class="logo-area">
+          <div class="logo-icon">L</div>
+          <div>
+            <h1 class="app-title">LCSI AI Assistant</h1>
+            <p class="app-subtitle">심리상담 RAG 파일럿 시스템</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <!-- Reset Session Button -->
+          <button id="btnReset" class="btn-icon" title="세션 초기화" aria-label="세션 초기화">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M16 3h5v5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 21H3v-5"></path>
+            </svg>
+          </button>
+          <!-- API Key Config Button -->
+          <button id="btnSettings" class="btn-icon" title="API 설정" aria-label="Gemini API 설정">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- 1. Welcome Screen (Entry) -->
+      <section id="welcomeScreen" class="screen welcome-screen">
+        <div class="welcome-hero">
+          <h2>맞춤형 AI 공감 상담소</h2>
+          <p>보유하신 LCSI 심리검사 결과 코드를 입력하시면, 외부 지식 노출을 차단한 채 오직 자체 검증된 해석 매뉴얼 데이터베이스(PoC 60종 구성)만을 RAG 검색하여 1:1 맞춤 안심 상담을 지원해 드립니다.</p>
+        </div>
+        
+        <div class="input-box">
+          <form id="welcomeForm">
+            <div class="form-group">
+              <label for="lcsiCodeInput">LCSI 심리 코드 입력</label>
+              <input type="text" id="lcsiCodeInput" class="text-input" placeholder="ESTJ" maxlength="8" required autocomplete="off" autofocus>
+            </div>
+            <button type="submit" class="btn-submit">맞춤형 상담소 입장</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 2. Chat Screen -->
+      <section id="chatScreen" class="screen chat-screen hidden">
+        <!-- Sidebar -->
+        <aside class="chat-sidebar">
+          <div class="profile-card">
+            <div id="profileBadge" class="profile-badge">CODE</div>
+            <h2 id="profileTitle" class="profile-title">로딩 중...</h2>
+            <p id="profileDesc" class="profile-desc">상담 결과 요약 정보 영역입니다.</p>
+          </div>
+          
+          <div id="dimensionBox" class="dimension-box">
+            <!-- Dynamic Dimension Cards here -->
+          </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+          <!-- Chat Messages Area -->
+          <div id="chatMessages" class="chat-messages">
+            <!-- Messages go here -->
+          </div>
+
+          <!-- Chat Input Bar -->
+          <div class="chat-input-bar">
+            <form id="chatForm" class="chat-input-form">
+              <input type="text" id="chatInput" class="chat-input" placeholder="결과에 대해 궁금한 점을 질문해 보세요..." autocomplete="off">
+              <button type="submit" class="btn-send" title="전송" aria-label="질문 전송">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- 3. Emergency Crisis Modal (Locked UI) -->
+  <div id="emergencyModal" class="modal-overlay hidden">
+    <div class="emergency-card">
+      <div class="danger-icon">!</div>
+      <h3>심리적 안정을 위한 안내</h3>
+      <p>작성해주신 내용에서 심리적 위기 징후(자살/자해 위험 등)가 감지되어 AI 챗봇 상담을 일시 중단합니다. 당신은 소중한 사람입니다. 지금 당장 아래 상담 핫라인이나 전문 기관을 통해 전문적인 도움을 꼭 받으시길 바랍니다.</p>
+      
+      <div class="emergency-hotlines">
+        <a href="tel:109" class="hotline-btn">
+          <span class="hotline-name">자살예방 상담전화</span>
+          <span class="hotline-num">109</span>
+        </a>
+        <a href="tel:1393" class="hotline-btn">
+          <span class="hotline-name">자살예방 상담 핫라인</span>
+          <span class="hotline-num">1393</span>
+        </a>
+        <a href="tel:1577-0199" class="hotline-btn">
+          <span class="hotline-name">정신건강 상담전화</span>
+          <span class="hotline-num">1577-0199</span>
+        </a>
+        <a href="tel:129" class="hotline-btn">
+          <span class="hotline-name">보건복지상담센터</span>
+          <span class="hotline-num">129</span>
+        </a>
+      </div>
+      
+      <button id="btnCloseEmergency" class="btn-close-emergency">상담소 처음으로 돌아가기</button>
+    </div>
+  </div>
+
+  <!-- 4. Settings Settings Modal -->
+  <div id="settingsModal" class="modal-overlay hidden">
+    <div class="settings-card">
+      <h3>Gemini API 설정</h3>
+      <form id="apiKeyForm">
+        <div class="form-group">
+          <label for="apiKeyInput">Google Gemini API Key</label>
+          <input type="password" id="apiKeyInput" class="text-input" placeholder="AI_Key_입력" required>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 20px; text-align: left; line-height: 1.4;">
+          * 이 챗봇은 서버를 거치지 않고 사용자 브라우저에서 직접 Google API를 호출하는 100% Client-Side 안전 구조를 채택하고 있습니다. 입력하신 API 키는 브라우저 내부 LocalStorage에만 암호화 저장되어 서버로 전송되지 않습니다.
+        </p>
+        <div class="settings-actions">
+          <button type="button" id="btnCloseSettings" class="btn-secondary">닫기</button>
+          <button type="submit" class="btn-submit" style="width: auto; padding: 10px 20px;">저장하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Project Scripts -->
+  <script src="lcsi_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
