@@ -5,109 +5,193 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LCSI 심리검사 맞춤형 온디바이스 AI 공감 상담소</title>
   <meta name="description" content="사용자의 기기에서 100% 실시간으로 직접 돌아가는 초경량 정밀 RAG 기반 프리미엄 심리상담 챗봇 서비스입니다.">
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Floating Tech Mesh Aura Background (Visual WoW Factor) -->
-  <div class="bg-aura-sphere-1"></div>
-  <div class="bg-aura-sphere-2"></div>
+  <!-- Premium Luxury Background Aura Systems (Dynamic Glow Mesh) -->
+  <div class="luxury-space-bg">
+    <div class="mesh-aura aura-cyan"></div>
+    <div class="mesh-aura aura-rose"></div>
+    <div class="mesh-aura aura-indigo"></div>
+    <div class="grid-overlay"></div>
+    <div class="grain-overlay"></div>
+  </div>
 
   <div class="app-container">
+    <!-- Double-border Neon Glowing Glass Panel -->
     <div class="glass-panel">
       
-      <!-- App Header -->
+      <!-- Top Luxury Navigation Header -->
       <header class="app-header">
         <div class="logo-area">
-          <div class="logo-icon">L</div>
-          <div>
+          <div class="logo-icon-wrapper">
+            <div class="logo-icon">L</div>
+            <div class="logo-glow-ring"></div>
+          </div>
+          <div class="brand-text">
             <h1 class="app-title">LCSI AI Assistant</h1>
-            <p class="app-subtitle">온디바이스 심리상담 RAG 시스템</p>
+            <div class="app-subtitle">
+              <span class="status-pulse-dot"></span>
+              <span class="subtitle-txt">온디바이스 심리상담 RAG 시스템</span>
+            </div>
           </div>
         </div>
+
         <div class="header-actions">
-          <!-- Engine Selector Dropdown -->
+          <!-- Premium Engine Selector Container -->
           <div class="engine-selector-container">
+            <div class="selector-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+            </div>
             <select id="engineSelector" class="engine-select" aria-label="AI 엔진 선택">
               <option value="ondevice" selected>💻 온디바이스 초경량 엔진 (0초 대기/무제한)</option>
               <option value="gemini">☁️ 구글 Gemini 클라우드 AI (API Key 필요)</option>
             </select>
           </div>
-          <!-- Reset Session Button -->
-          <button id="btnReset" class="btn-icon" title="세션 초기화" aria-label="세션 초기화">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-              <path d="M16 3h5v5"></path>
-              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-              <path d="M8 21H3v-5"></path>
-            </svg>
-          </button>
-          <!-- API Key Config Button -->
-          <button id="btnSettings" class="btn-icon" title="API 설정" aria-label="Gemini API 설정">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </button>
+
+          <!-- Action Buttons Group -->
+          <div class="action-btn-group">
+            <!-- Reset Session Button -->
+            <button id="btnReset" class="btn-icon" title="세션 초기화" aria-label="세션 초기화">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                <path d="M16 3h5v5"></path>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                <path d="M8 21H3v-5"></path>
+              </svg>
+            </button>
+            
+            <!-- API Key Config Button -->
+            <button id="btnSettings" class="btn-icon" title="API 설정" aria-label="Gemini API 설정">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
-      <!-- 1. Welcome Screen (Entry) -->
+      <!-- 1. Welcome Screen (Premium Entry Portal) -->
       <section id="welcomeScreen" class="screen welcome-screen">
-        <div class="welcome-hero">
-          <h2>온디바이스 맞춤형 공감 상담소</h2>
-          <p>사용하시는 디바이스 내부에서 <strong>정밀 매칭 자연어 처리(NLP) 엔진</strong>을 직접 구동합니다. 다운로드 대기시간과 사양 제약이 전혀 없는 100%의 개인정보 보호 및 실시간 RAG 성격 해석 상담을 즉각 경험해 보세요.</p>
-        </div>
-        
-        <div class="input-box">
-          <form id="welcomeForm">
-            <div class="form-group">
-              <label for="lcsiCodeInput">LCSI 심리 코드 입력</label>
-              <input type="text" id="lcsiCodeInput" class="text-input" placeholder="ESTJ" maxlength="8" required autocomplete="off" autofocus>
-            </div>
-            <button type="submit" class="btn-submit">상담방 즉시 입장</button>
-          </form>
+        <div class="welcome-container">
+          <div class="premium-badge-decorator">PREMIUM COUNSELING PORTAL</div>
+          
+          <div class="welcome-hero">
+            <h2>공감의 온도를 더하는<br><span class="gradient-text">나만을 위한 심리 공간</span></h2>
+            <p>사용하시는 기기 내부의 <strong>독립된 온디바이스 심리 매칭 엔진</strong>을 구동합니다. 데이터 외부 유출 없이 100% 개인정보를 철저히 보장하며, 고품격 RAG 기술 기반 정밀 심리 분석을 직접 받아보세요.</p>
+          </div>
+          
+          <!-- Elegant Luxury Form Card -->
+          <div class="input-box glass-card">
+            <div class="card-border-glow"></div>
+            <form id="welcomeForm" class="welcome-form">
+              <div class="form-group">
+                <label for="lcsiCodeInput">LCSI 심리 코드</label>
+                <div class="input-wrapper">
+                  <input type="text" id="lcsiCodeInput" class="text-input" placeholder="ESTJ" maxlength="8" required autocomplete="off" autofocus>
+                  <span class="input-focus-bar"></span>
+                </div>
+              </div>
+              <button type="submit" class="btn-submit">
+                <span>상담방 즉시 입장</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </form>
 
-          <span class="sample-chips-label">빠른 체험을 위한 대표 심리 코드 클릭</span>
-          <div class="sample-chips">
-            <button type="button" class="sample-chip" data-code="ESTJ">ESTJ #실행가</button>
-            <button type="button" class="sample-chip" data-code="INFP">INFP #공감자</button>
-            <button type="button" class="sample-chip" data-code="ENFP">ENFP #탐험가</button>
-            <button type="button" class="sample-chip" data-code="ISTJ">ISTJ #수호자</button>
-            <button type="button" class="sample-chip" data-code="INFJ">INFJ #비전가</button>
-            <button type="button" class="sample-chip" data-code="INTJ">INTJ #전략가</button>
+            <div class="divider-with-title">
+              <span class="sample-chips-label">체험용 대표 코드 간편 클릭</span>
+            </div>
+            
+            <div class="sample-chips">
+              <button type="button" class="sample-chip" data-code="ESTJ">
+                <span class="chip-inner">ESTJ <span class="chip-tag">#실행가</span></span>
+              </button>
+              <button type="button" class="sample-chip" data-code="INFP">
+                <span class="chip-inner">INFP <span class="chip-tag">#공감자</span></span>
+              </button>
+              <button type="button" class="sample-chip" data-code="ENFP">
+                <span class="chip-inner">ENFP <span class="chip-tag">#탐험가</span></span>
+              </button>
+              <button type="button" class="sample-chip" data-code="ISTJ">
+                <span class="chip-inner">ISTJ <span class="chip-tag">#수호자</span></span>
+              </button>
+              <button type="button" class="sample-chip" data-code="INFJ">
+                <span class="chip-inner">INFJ <span class="chip-tag">#비전가</span></span>
+              </button>
+              <button type="button" class="sample-chip" data-code="INTJ">
+                <span class="chip-inner">INTJ <span class="chip-tag">#전략가</span></span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 2. Chat Screen -->
+      <!-- 2. Chat Screen (Interactive Psychologist Dashboard) -->
       <section id="chatScreen" class="screen chat-screen hidden">
-        <!-- Sidebar -->
+        <!-- Dashboard Sidebar Panel -->
         <aside class="chat-sidebar">
+          <div class="sidebar-header">
+            <span class="sidebar-badge">ANALYST REPORT</span>
+            <div class="security-lock-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span>SECURED</span>
+            </div>
+          </div>
+
           <div class="profile-card">
-            <div id="profileBadge" class="profile-badge">CODE</div>
+            <div class="badge-container">
+              <div id="profileBadge" class="profile-badge">CODE</div>
+              <div class="badge-orbit"></div>
+            </div>
             <h2 id="profileTitle" class="profile-title">로딩 중...</h2>
-            <p id="profileDesc" class="profile-desc">상담 결과 요약 정보 영역입니다.</p>
+            <div class="desc-container">
+              <p id="profileDesc" class="profile-desc">상담 결과 요약 정보 영역입니다.</p>
+            </div>
           </div>
           
-          <div id="dimensionBox" class="dimension-box">
-            <!-- Dynamic Dimension Cards here -->
+          <div class="dimension-section">
+            <h3 class="section-title-label">성격 다차원 분석 데이터</h3>
+            <div id="dimensionBox" class="dimension-box">
+              <!-- Dynamic Dimension Cards injected here -->
+            </div>
           </div>
         </aside>
 
-        <!-- Main Chat Area -->
+        <!-- Main Chat Panel -->
         <div class="chat-main">
-          <!-- Chat Messages Area -->
+          <!-- Chat Message Container -->
           <div id="chatMessages" class="chat-messages">
             <!-- Messages go here -->
           </div>
 
-          <!-- Chat Input Bar -->
+          <!-- Bottom Chat Form Panel -->
           <div class="chat-input-bar">
+            <div class="chat-input-glow"></div>
             <form id="chatForm" class="chat-input-form">
-              <input type="text" id="chatInput" class="chat-input" placeholder="결과에 대해 궁금한 점을 질문해 보세요..." autocomplete="off">
+              <div class="input-inner-wrapper">
+                <input type="text" id="chatInput" class="chat-input" placeholder="결과에 대해 궁금한 점을 질문해 보세요..." autocomplete="off">
+                <div class="input-border-glow"></div>
+              </div>
               <button type="submit" class="btn-send" title="전송" aria-label="질문 전송">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="send-icon">
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
@@ -120,28 +204,44 @@
     </div>
   </div>
 
-  <!-- 3. Emergency Crisis Modal (Locked UI) -->
+  <!-- 3. Emergency Crisis Modal (Premium Locked UI) -->
   <div id="emergencyModal" class="modal-overlay hidden">
-    <div class="emergency-card">
-      <div class="danger-icon">!</div>
+    <div class="emergency-card glass-modal">
+      <div class="modal-border-accent"></div>
+      <div class="danger-icon-wrapper">
+        <div class="danger-icon">!</div>
+        <div class="pulse-ring red"></div>
+      </div>
       <h3>심리적 안정을 위한 안내</h3>
-      <p>작성해주신 내용에서 심리적 위기 징후(자살/자해 위험 등)가 감지되어 AI 챗봇 상담을 즉시 중단합니다. 당신은 소중한 사람입니다. 지금 당장 아래 상담 핫라인이나 전문 기관을 통해 따뜻한 도움을 꼭 받으시길 바랍니다.</p>
+      <p>작성해주신 내용에서 심리적 위기 징후(자살/자해 위험 등)가 감지되어 AI 챗봇 상담을 즉시 안전하게 통제 및 중단합니다. 당신은 세상에 단 하나뿐인 소중한 사람입니다. 지금 바로 아래의 긴급 전문 기관을 통해 따뜻한 도움의 문을 두드려 보시기 바랍니다.</p>
       
       <div class="emergency-hotlines">
         <a href="tel:109" class="hotline-btn">
-          <span class="hotline-name">자살예방 상담전화</span>
+          <span class="hotline-desc">
+            <span class="hotline-name">자살예방 상담전화</span>
+            <span class="hotline-helper">전화 요금 전액 무료</span>
+          </span>
           <span class="hotline-num">109</span>
         </a>
         <a href="tel:1393" class="hotline-btn">
-          <span class="hotline-name">자살예방 상담 핫라인</span>
+          <span class="hotline-desc">
+            <span class="hotline-name">자살예방 상담 핫라인</span>
+            <span class="hotline-helper">24시간 언제나 연결 가능</span>
+          </span>
           <span class="hotline-num">1393</span>
         </a>
         <a href="tel:1577-0199" class="hotline-btn">
-          <span class="hotline-name">정신건강 상담전화</span>
+          <span class="hotline-desc">
+            <span class="hotline-name">정신건강 상담전화</span>
+            <span class="hotline-helper">전문 임상가가 안내해 드립니다</span>
+          </span>
           <span class="hotline-num">1577-0199</span>
         </a>
         <a href="tel:129" class="hotline-btn">
-          <span class="hotline-name">보건복지상담센터</span>
+          <span class="hotline-desc">
+            <span class="hotline-name">보건복지상담센터</span>
+            <span class="hotline-helper">국가 제공 희망복지 안내</span>
+          </span>
           <span class="hotline-num">129</span>
         </a>
       </div>
@@ -150,21 +250,25 @@
     </div>
   </div>
 
-  <!-- 4. Settings Settings Modal -->
+  <!-- 4. Settings Configuration Modal (Premium Glass System) -->
   <div id="settingsModal" class="modal-overlay hidden">
-    <div class="settings-card">
+    <div class="settings-card glass-modal">
+      <div class="modal-border-accent"></div>
       <h3>Gemini API 설정</h3>
       <form id="apiKeyForm">
         <div class="form-group">
           <label for="apiKeyInput">Google Gemini API Key</label>
-          <input type="password" id="apiKeyInput" class="text-input" placeholder="AI_Key_입력" required>
+          <div class="input-wrapper">
+            <input type="password" id="apiKeyInput" class="text-input" placeholder="AI_Key_입력" required>
+            <span class="input-focus-bar"></span>
+          </div>
         </div>
-        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 20px; text-align: left; line-height: 1.4;">
-          * 이 챗봇은 기기 내 '초경량 온디바이스 매칭 엔진'을 기본 탑재하고 있어 API 키 없이 작동합니다. 단, 구글 생성형 클라우드 AI 모드로 정밀 대화하고자 할 경우에만 API 키를 입력해 주세요.
+        <p class="settings-disclaimer">
+          * 이 시스템은 기기 내 <strong>온디바이스 최적화 RAG 엔진</strong>을 탑재하여 API 키 없이 무제한으로 사용하실 수 있습니다. 단, 구글 생성형 클라우드 AI 모드로 최신 인공지능과 대화하고 싶은 경우에만 안전한 API Key를 등록해 주세요.
         </p>
         <div class="settings-actions">
           <button type="button" id="btnCloseSettings" class="btn-secondary">닫기</button>
-          <button type="submit" class="btn-submit" style="width: auto; padding: 10px 20px;">저장하기</button>
+          <button type="submit" class="btn-submit-premium">저장하기</button>
         </div>
       </form>
     </div>
