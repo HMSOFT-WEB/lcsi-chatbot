@@ -222,6 +222,15 @@ welcomeForm.addEventListener('submit', (e) => {
   chatScreen.classList.remove('hidden');
 });
 
+// Interactive Sample Chips Selection Handler
+document.querySelectorAll('.sample-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    lcsiCodeInput.value = chip.dataset.code;
+    welcomeForm.dispatchEvent(new Event('submit'));
+  });
+});
+
+
 // Settings & API Key Configuration
 document.getElementById('btnSettings').addEventListener('click', () => {
   apiKeyInput.value = currentSession.apiKey;
