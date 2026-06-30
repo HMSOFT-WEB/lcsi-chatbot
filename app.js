@@ -7,6 +7,7 @@ const welcomeForm = document.getElementById('welcomeForm');
 const lcsiCodeInput = document.getElementById('lcsiCodeInput');
 
 const profileBadge = document.getElementById('profileBadge');
+const characterGraphic = document.getElementById('characterGraphic');
 const profileTitle = document.getElementById('profileTitle');
 const profileDesc = document.getElementById('profileDesc');
 const dimensionBox = document.getElementById('dimensionBox');
@@ -191,6 +192,7 @@ welcomeForm.addEventListener('submit', (e) => {
   
   // Load Sidebar UI Profile
   profileBadge.innerText = profile.code;
+  updateCharacterGraphic(profile.code);
   profileTitle.innerText = profile.title;
   profileDesc.innerText = profile.summary;
   
@@ -400,3 +402,152 @@ document.getElementById('btnCloseEmergency').addEventListener('click', () => {
   chatScreen.classList.add('hidden');
   welcomeScreen.classList.remove('hidden');
 });
+
+
+// Dynamic MBTI/LCSI Character Generator with Motion Graphics (SVG)
+function updateCharacterGraphic(code) {
+  const graphicContainer = document.getElementById('characterGraphic');
+  if (!graphicContainer) return;
+  
+  const type = code.toUpperCase();
+  
+  // 1. Determine Temperament Group
+  let group = "SJ"; // Default Guardian
+  if (type.includes('N') && type.includes('F')) {
+    group = "NF"; // Idealist
+  } else if (type.includes('N') && type.includes('T')) {
+    group = "NT"; // Rational
+  } else if (type.includes('S') && type.includes('P')) {
+    group = "SP"; // Artisan
+  } else if (type.includes('S') && type.includes('J')) {
+    group = "SJ"; // Guardian
+  } else {
+    group = type.includes('N') ? "NT" : "SJ";
+  }
+
+  let svgContent = "";
+
+  // 2. Generate detailed, stunning vector characters for each group
+  if (group === "NF") {
+    // 🌸 Idealist NF (Dreamer, Companion, Counselor - Wings, Sparks, Heart sprout)
+    svgContent = `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f43f5e" />
+            <stop offset="100%" stop-color="#8b5cf6" />
+          </linearGradient>
+          <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec4899" stop-opacity="0.7" />
+            <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.3" />
+          </linearGradient>
+        </defs>
+        <!-- Wing Left -->
+        <path d="M 28 45 C 5 25, 10 10, 35 38 C 30 25, 12 18, 30 45" fill="url(#wingGrad)" class="nf-wing-left" />
+        <!-- Wing Right -->
+        <path d="M 72 45 C 95 25, 90 10, 65 38 C 70 25, 88 18, 70 45" fill="url(#wingGrad)" class="nf-wing-right" />
+        <!-- Glowing Core Body -->
+        <circle cx="50" cy="48" r="16" fill="url(#nfGrad)" />
+        <circle cx="50" cy="48" r="13" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+        <!-- Face Features -->
+        <path d="M 46 46 A 1 1 0 0 0 46 48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+        <path d="M 54 46 A 1 1 0 0 0 54 48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+        <path d="M 48 51 Q 50 53 52 51" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none" />
+        <!-- Sprout on Head -->
+        <path d="M 50 32 Q 50 25 54 22 Q 51 25 50 30" fill="#10b981" />
+        <path d="M 50 32 Q 50 25 46 22 Q 49 25 50 30" fill="#10b981" />
+        <!-- Sparkling stars -->
+        <polygon points="50,12 51,15 54,16 51,17 50,20 49,17 46,16 49,15" fill="#fbcfe8" class="sp-spark-glow" style="transform: scale(0.6); transform-origin: 50px 12px;" />
+        <polygon points="25,65 26,67 28,68 26,69 25,71 24,69 22,68 24,67" fill="#fbcfe8" class="sp-spark-glow" style="transform: scale(0.5); transform-origin: 25px 65px; animation-delay: 1s;" />
+      </svg>
+    `;
+  } else if (group === "SJ") {
+    // 🛡️ Guardian SJ (Sentinel, Protector, Executor - Shield, Dual Interlocking Gears)
+    svgContent = `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sjGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#06b6d4" />
+            <stop offset="100%" stop-color="#10b981" />
+          </linearGradient>
+        </defs>
+        <!-- Background Gear Secondary -->
+        <g class="sj-cog-secondary">
+          <circle cx="50" cy="50" r="28" fill="none" stroke="rgba(6, 182, 212, 0.15)" stroke-width="4" stroke-dasharray="6, 3" />
+        </g>
+        <!-- Background Gear Primary -->
+        <g class="sj-cog-primary">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(16, 185, 129, 0.2)" stroke-width="2" stroke-dasharray="10, 8" />
+        </g>
+        <!-- Solid Shield Body -->
+        <path d="M 34 32 L 66 32 C 66 32, 66 54, 50 68 C 34 54, 34 32, 34 32 Z" fill="url(#sjGrad)" />
+        <path d="M 37 35 L 63 35 C 63 35, 63 52, 50 64 C 37 52, 37 35, 37 35 Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+        <!-- Face Features -->
+        <path d="M 45 42 A 1 1 0 0 0 45 44" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+        <path d="M 55 42 A 1 1 0 0 0 55 44" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+        <path d="M 47 48 L 53 48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+        <!-- Golden Star on Shield -->
+        <polygon points="50,52 52,55 55,55 53,57 54,60 50,58 46,60 47,57 45,55 48,55" fill="#fbcfe8" class="sp-spark-glow" style="transform: scale(0.85); transform-origin: 50px 55px;" />
+      </svg>
+    `;
+  } else if (group === "NT") {
+    // 🧠 Rational NT (Strategist, Thinker, Tech - Floating Gyroscopic Prism, Hologram Grid)
+    svgContent = `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ntGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8b5cf6" />
+            <stop offset="100%" stop-color="#3b82f6" />
+          </linearGradient>
+        </defs>
+        <!-- Grid Ring -->
+        <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(139, 92, 246, 0.15)" stroke-width="1" />
+        <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1.5" stroke-dasharray="15, 10" class="sj-cog-primary" />
+        <!-- Orb Outer nodes -->
+        <circle cx="14" cy="50" r="3" fill="#3b82f6" class="nt-node-glow" />
+        <circle cx="86" cy="50" r="3" fill="#8b5cf6" class="nt-node-glow" style="animation-delay: 1.5s;" />
+        <!-- Gyroscopic Prism Body -->
+        <g class="nt-prism-core">
+          <!-- Octahedron Structure -->
+          <polygon points="50,20 72,50 50,80 28,50" fill="url(#ntGrad)" opacity="0.85" />
+          <polygon points="50,20 50,80 72,50" fill="rgba(255,255,255,0.15)" />
+          <polygon points="50,20 28,50 50,50" fill="rgba(255,255,255,0.08)" />
+          <!-- Inner Thinking Core -->
+          <circle cx="50" cy="50" r="7" fill="#ffffff" class="nt-node-glow" />
+          <!-- Cute Glasses / Eyes overlay -->
+          <rect x="42" y="47" width="6" height="4" rx="1" fill="none" stroke="#2e1065" stroke-width="1.5" />
+          <rect x="52" y="47" width="6" height="4" rx="1" fill="none" stroke="#2e1065" stroke-width="1.5" />
+          <line x1="48" y1="49" x2="52" y2="49" stroke="#2e1065" stroke-width="1.5" />
+        </g>
+      </svg>
+    `;
+  } else {
+    // ⚡ Artisan SP (Explorer, Maker, Creator - Wind wave, Spark, Lightning)
+    svgContent = `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="spGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" />
+            <stop offset="100%" stop-color="#ec4899" />
+          </linearGradient>
+        </defs>
+        <!-- Wind/Movement Lines -->
+        <path d="M 15 28 L 45 28" stroke="rgba(245, 158, 11, 0.3)" stroke-width="2" stroke-linecap="round" class="sp-wind-streak" />
+        <path d="M 22 72 L 52 72" stroke="rgba(236, 72, 153, 0.3)" stroke-width="2" stroke-linecap="round" class="sp-wind-streak" style="animation-delay: 2s;" />
+        <!-- Floating Lightning / Spark Core -->
+        <g class="sp-spark-glow">
+          <polygon points="50,18 64,36 82,36 68,54 75,78 50,66 25,78 32,54 18,36 36,36" fill="url(#spGrad)" />
+          <polygon points="50,23 60,38 75,38 64,52 69,72 50,62 31,72 36,52 25,38 40,38" fill="rgba(255,255,255,0.2)" />
+        </g>
+        <!-- Small goggles at the center -->
+        <circle cx="45" cy="46" r="4" fill="none" stroke="#ffffff" stroke-width="2" />
+        <circle cx="55" cy="46" r="4" fill="none" stroke="#ffffff" stroke-width="2" />
+        <line x1="49" y1="46" x2="51" y2="46" stroke="#ffffff" stroke-width="2" />
+        <!-- Cute Smile -->
+        <path d="M 48 52 Q 50 54 52 52" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none" />
+      </svg>
+    `;
+  }
+
+  graphicContainer.innerHTML = svgContent;
+}
