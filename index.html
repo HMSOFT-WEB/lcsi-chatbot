@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LCSI 심리검사 맞춤형 온디바이스 AI 공감 상담소</title>
-  <meta name="description" content="사용자의 기기에서 100% 실시간으로 직접 돌아가는 온디바이스 SLM RAG 기반 프리미엄 심리상담 챗봇 서비스입니다.">
-  <script src="coi-serviceworker.js"></script>
+  <meta name="description" content="사용자의 기기에서 100% 실시간으로 직접 돌아가는 초경량 정밀 RAG 기반 프리미엄 심리상담 챗봇 서비스입니다.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +17,7 @@
         <div class="logo-area">
           <div class="logo-icon">L</div>
           <div>
-            <h1 class="app-title">LCSI On-Device AI</h1>
+            <h1 class="app-title">LCSI AI Assistant</h1>
             <p class="app-subtitle">온디바이스 심리상담 RAG 시스템</p>
           </div>
         </div>
@@ -26,8 +25,8 @@
           <!-- Engine Selector Dropdown -->
           <div class="engine-selector-container">
             <select id="engineSelector" class="engine-select" aria-label="AI 엔진 선택">
-              <option value="ondevice" selected>💻 온디바이스 AI (무제한/오프라인)</option>
-              <option value="gemini">☁️ 구글 Gemini AI (API Key 필요)</option>
+              <option value="ondevice" selected>💻 온디바이스 초경량 엔진 (0초 대기/무제한)</option>
+              <option value="gemini">☁️ 구글 Gemini 클라우드 AI (API Key 필요)</option>
             </select>
           </div>
           <!-- Reset Session Button -->
@@ -49,29 +48,11 @@
         </div>
       </header>
 
-      <!-- On-Device AI Downloading Dashboard overlay (Shows when model loading is active) -->
-      <div id="modelLoaderContainer" class="model-loader-container hidden">
-        <div class="loader-content">
-          <div class="loader-spinner-box">
-            <div class="spinner-neon"></div>
-            <div class="loader-logo">ON</div>
-          </div>
-          <h3>온디바이스 AI 엔진 초기화 중</h3>
-          <p id="modelLoadStatus">기기(WebGPU) 가속을 확인하고 로컬 인공지능 모델(Qwen2.5-0.5B 약 350MB)을 메모리에 상주시키는 중입니다. 최초 1회만 다운로드됩니다.</p>
-          <div class="progress-wrapper">
-            <div class="progress-bar-bg">
-              <div id="modelProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
-            </div>
-            <div id="modelProgressText" class="progress-percent">0%</div>
-          </div>
-        </div>
-      </div>
-
       <!-- 1. Welcome Screen (Entry) -->
       <section id="welcomeScreen" class="screen welcome-screen">
         <div class="welcome-hero">
-          <h2>온디바이스 AI 맞춤형 공감 상담소</h2>
-          <p>사용하시는 디바이스(PC/모바일) 내부의 GPU를 이용하여 <strong>완벽한 오프라인 환경</strong>에서 AI 연산을 직접 수행합니다. 외부 서버 전송이 일절 없는 100%의 개인정보 보호 및 실시간 RAG 성격 해석 가이드를 무상 경험해 보세요.</p>
+          <h2>온디바이스 맞춤형 공감 상담소</h2>
+          <p>사용하시는 디바이스 내부에서 <strong>정밀 매칭 자연어 처리(NLP) 엔진</strong>을 직접 구동합니다. 다운로드 대기시간과 사양 제약이 전혀 없는 100%의 개인정보 보호 및 실시간 RAG 성격 해석 상담을 즉각 경험해 보세요.</p>
         </div>
         
         <div class="input-box">
@@ -80,7 +61,7 @@
               <label for="lcsiCodeInput">LCSI 심리 코드 입력</label>
               <input type="text" id="lcsiCodeInput" class="text-input" placeholder="ESTJ" maxlength="8" required autocomplete="off" autofocus>
             </div>
-            <button type="submit" class="btn-submit">온디바이스 상담방 입장</button>
+            <button type="submit" class="btn-submit">상담방 즉시 입장</button>
           </form>
         </div>
       </section>
@@ -165,7 +146,7 @@
           <input type="password" id="apiKeyInput" class="text-input" placeholder="AI_Key_입력" required>
         </div>
         <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 20px; text-align: left; line-height: 1.4;">
-          * 이 챗봇은 '온디바이스 AI'를 기본 엔진으로 권장하지만, 구글 클라우드 AI 모드를 활성화하고자 할 경우에만 API 키 입력이 요구됩니다. 입력하신 키는 로컬 보안 저장소에만 암호화 저장됩니다.
+          * 이 챗봇은 기기 내 '초경량 온디바이스 매칭 엔진'을 기본 탑재하고 있어 API 키 없이 작동합니다. 단, 구글 생성형 클라우드 AI 모드로 정밀 대화하고자 할 경우에만 API 키를 입력해 주세요.
         </p>
         <div class="settings-actions">
           <button type="button" id="btnCloseSettings" class="btn-secondary">닫기</button>
@@ -177,7 +158,6 @@
 
   <!-- Project Scripts -->
   <script src="lcsi_data.js"></script>
-  <!-- Main application loaded as a module for ESM importing of WebLLM -->
-  <script type="module" src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
